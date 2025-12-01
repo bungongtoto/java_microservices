@@ -4,6 +4,7 @@ package com.in28minutes.rest.webservices.restful_web_services.controllers;
 import com.in28minutes.rest.webservices.restful_web_services.exceptions.UserNotFoundException;
 import com.in28minutes.rest.webservices.restful_web_services.models.User;
 import com.in28minutes.rest.webservices.restful_web_services.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Object> CreateUser(@RequestBody User user){
+    public ResponseEntity<Object> CreateUser(@Valid @RequestBody User user){
         User savedUser = userService.save(user);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
