@@ -1,5 +1,6 @@
 package com.in28minutes.rest.webservices.restful_web_services;
 
+import com.in28minutes.rest.webservices.restful_web_services.controllers.HelloWorldController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
