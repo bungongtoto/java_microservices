@@ -1,20 +1,41 @@
 package com.in28minutes.rest.webservices.restful_web_services.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity(name = "users_details")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Integer id;
     @Size(min = 2, message = "name should have at least two characters.")
-    @JsonProperty("user_name")
+    @NotNull(message = "name can not be null")
+    //@JsonProperty("user_name")
     private String name;
 
     @Past(message = "birth date should be in the past.")
-    @JsonProperty("birth_date")
+    @NotNull(message = "birthDate cannot be null")
+    //@JsonProperty("birth_date")
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Post> posts;
+
+    public User(){};
+
+    public User( String name, LocalDate birthDate) {
+        this.name = name;
+        this.birthDate = birthDate;
+    }
 
     public User(Integer id, String name, LocalDate birthDate) {
         this.id = id;
@@ -44,6 +65,14 @@ public class User {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
