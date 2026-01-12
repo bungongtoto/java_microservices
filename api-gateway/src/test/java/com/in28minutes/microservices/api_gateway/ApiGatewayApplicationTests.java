@@ -1,4 +1,4 @@
-package com.in28minutes.mircroservices.api_gateway;
+package com.in28minutes.microservices.api_gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
